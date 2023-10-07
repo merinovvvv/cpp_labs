@@ -1,5 +1,5 @@
 /**
-*	ƒано два возрастающих массива. Ќайти количество общих элементов в них. 
+*	Two increasing arrays are given. Find the number of common elements in them.
 *
 *			test cases:
 *
@@ -34,11 +34,11 @@ int main()
 	else {
 		vector <int> firstVector(size1);
 		vector <int> secondVector(size2);
-		for (int i = 0; i < firstVector.size(); ++i) { //вводим элементы вектора 1
+		for (int i = 0; i < firstVector.size(); ++i) {
 			cout << "Input the item of the 1st vector: ";
 			cin >> firstVector[i];
 		}
-		for (int j = 0; j < secondVector.size(); ++j) { //вводим элементы вектора 2
+		for (int j = 0; j < secondVector.size(); ++j) {
 			cout << "Input the item of the 2nd vector: ";
 			cin >> secondVector[j];
 		}
@@ -69,18 +69,18 @@ int commonElemets(vector <int> vec1, vector <int> vec2) {
 	vector <int> vec2Sorted = vec2;
 	sort(vec1Sorted.begin(), vec1Sorted.end());
 	sort(vec2Sorted.begin(), vec2Sorted.end());
-	//сравниваем наши векторы с такими же сортированными по возрастанию (провер€ем на возрастание)
+	//compare our vectors with the same sorted in ascending order (check for ascending)
 	if (vec1 == vec1Sorted && vec2 == vec2Sorted) {
 		for (int k = 0; k < vec1.size(); ++k) {
 			for (int h = 0; h < vec2.size(); ++h) {
 				if (vec1[k] == vec2[h]) {
-					counter++; //прибавл€ем к счетчику единицу, если нашлись одинаковые элементы
+					counter++; //add one to the counter if there are identical elements
 				}
 			}
 		}
 	}
 	else {
-		cout << "One of the vectors is not increasing";//если хот€ бы один из векторов не возрастающий
+		cout << "One of the vectors is not increasing";//cout if at least one of the vectors is not increasing
 		exit(0); 
 	}
 

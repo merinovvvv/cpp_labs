@@ -1,5 +1,5 @@
 /**
-* Переставить элементы массива в обратном порядке без дополнительных массивов.
+* Rearrange the array elements in reverse order without additional arrays.
 * 
 *			test cases:
 * 
@@ -29,13 +29,13 @@ int main()
 		cout << "Vector is empty.";
 	}	else {
 		vector <int> firstVector(size);
-		for (int i = 0; i < firstVector.size(); ++i) { //вводим элементы вектора
+		for (int i = 0; i < firstVector.size(); ++i) {
 			cout << "Input the item of the vector: ";
 			cin >> firstVector[i];
 		}
-		reverse(firstVector.begin(), firstVector.end()); //переставляем элементы массива в обратном порядке
+		reverse(firstVector.begin(), firstVector.end()); //rearrange the array elements in reverse order
 		for (int i = 0; i < firstVector.size(); ++i) {
-			cout << firstVector[i] << " "; //выводим элементы переставленного массива
+			cout << firstVector[i] << " "; //output the elements of the presented array
 		}
 	}
 	

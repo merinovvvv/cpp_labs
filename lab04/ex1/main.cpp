@@ -1,7 +1,7 @@
 /**
-* Дано число n. Найти наименьшую цифру,
-* которая отсутствует в его десятичной записи.
-* Подумайте, над возможностью использования контейнеров std::map, std::set.
+*The number n is given. 
+*Find the smallest digit that is missing in its decimal notation.
+*Think about the possibility of using containers std::map, std::set.
 *
 *		test cases:
 * 
@@ -29,9 +29,9 @@ int main()
 	while (number != 0) {
 		int figure = number % 10;
 		number /= 10;
-		numSet.insert(figure); //запись цифр в set
+		numSet.insert(figure); //writing down the digits into the set
 	}
-	for (int i = 0; i <= 9; ++i) { //проверка наличия цифры в числе (set)
+	for (int i = 0; i <= 9; ++i) { //figures in number/set checkout
 		if (numSet.count(i) == 0) {
 			cout << i << " is missing";
 			return 0;

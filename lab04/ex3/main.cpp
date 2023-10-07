@@ -1,6 +1,6 @@
 /**
-* Дан массив из n целых чисел.
-* Проверить, является ли он перестановкой, то есть содержит различные числа от 1 до n.
+*An array of n integers is given.
+*Check whether it is a permutation (contains various numbers from 1 to n).
 * 
 *			test cases:
 *
@@ -34,16 +34,16 @@ int main()
 	}
 	else {
 		vector <int> firstVector(size);
-		for (int i = 0; i < firstVector.size(); ++i) { //вводим элементы вектора
+		for (int i = 0; i < firstVector.size(); ++i) { 
 			cout << "Input the item of the vector: ";
 			cin >> firstVector[i];
 		}
-		sort(firstVector.begin(), firstVector.end()); //отсортировали вектор по возрастанию
+		sort(firstVector.begin(), firstVector.end()); //sort the vector in ascending order
 		vector <int> secondVector(size);
-		for (int j = 0; j < secondVector.size(); ++j) { //создали второй вектор с элементами от 1 до n
+		for (int j = 0; j < secondVector.size(); ++j) { //create a second vector with elements from 1 to n
 			secondVector[j] = j + 1;
 		}
-		for (int k = 0; k < secondVector.size(); ++k) { //по индексам проверяем первоначальный вектор с вектором от 1 до n
+		for (int k = 0; k < secondVector.size(); ++k) { //by indexes, compare the initial vector with the vector from 1 to n
 			if (firstVector[k] != secondVector[k]) {
 				cout << "\nThe vector is not the permutation.";
 				return 0;
