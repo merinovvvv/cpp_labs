@@ -37,6 +37,7 @@ int main()
 			return 0;
 		}
 	}
+	cout << "The number contains all the figures.";
 	return 0;
 }
 

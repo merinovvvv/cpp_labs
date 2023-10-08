@@ -20,14 +20,13 @@ using std::string;
 using std::sort;
 
 int sizeInput1(string input);
-int sizeInput2(string input);
-int commonElemets(vector <int> vec1, vector <int> vec2);
+int commonElemets(vector <int> const& vec1, vector <int> const& vec2);
 
 
 int main()
 {
 	int size1 = sizeInput1("Input the size of 1st vector:\n");
-	int size2 = sizeInput2("Input the size of 2nd vector:\n");
+	int size2 = sizeInput1("Input the size of 2nd vector:\n");
 	if (size1 == 0 || size2 == 0) {
 		cout << "0 common elements";
 	}
@@ -55,15 +54,7 @@ int sizeInput1(string input)
 	return size1;
 }
 
-int sizeInput2(string input)
-{
-	int size2;
-	cout << input;
-	cin >> size2;
-	return size2;
-}
-
-int commonElemets(vector <int> vec1, vector <int> vec2) {
+int commonElemets(vector <int> const& vec1, vector <int> const& vec2) {
 	int counter = 0;
 	vector <int> vec1Sorted = vec1;
 	vector <int> vec2Sorted = vec2;
