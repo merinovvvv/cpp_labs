@@ -7,12 +7,14 @@
 *	5			5			1 2 3 4 5		1 2 3 5 6				4 common elements
 *	0			5													0 common elements
 *	6			8			3 4 8 10 12 5	5 8 9 10 12 14 16 17	One of the vectors is not increasing
+*	3			3			1 1 1			1 2 3					1 common element
 */
 
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
+
 using std::cin;
 using std::cout;
 using std::vector;
@@ -20,7 +22,7 @@ using std::string;
 using std::sort;
 
 int sizeInput1(string input);
-int commonElemets(vector <int> const& vec1, vector <int> const& vec2);
+int commonElemets(vector <int>& vec1, vector <int>& vec2);
 
 
 int main()
@@ -54,7 +56,7 @@ int sizeInput1(string input)
 	return size1;
 }
 
-int commonElemets(vector <int> const& vec1, vector <int> const& vec2) {
+int commonElemets(vector <int>& vec1, vector <int>& vec2) {
 	int counter = 0;
 	vector <int> vec1Sorted = vec1;
 	vector <int> vec2Sorted = vec2;
@@ -65,7 +67,8 @@ int commonElemets(vector <int> const& vec1, vector <int> const& vec2) {
 		for (int k = 0; k < vec1.size(); ++k) {
 			for (int h = 0; h < vec2.size(); ++h) {
 				if (vec1[k] == vec2[h]) {
-					counter++; //add one to the counter if there are identical elements
+					counter++; //add one to the counter if there are identical elements	
+					vec2.erase(vec2.begin() + h);
 				}
 			}
 		}
