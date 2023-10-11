@@ -4,11 +4,15 @@ Print in ascending order all simple irreducible fractions
 enclosed between 0 and 1, whose denominators are less than a given number n.
 * 
 *   test cases:
+*   
+*   n   result
 * 
 *   5   0/1 1/4 1/3 1/2 2/3 3/4 1/1
 *   7   0/1 1/6 1/5 1/4 1/3 2/5 1/2 3/5 2/3 3/4 4/5 5/6 1/1
 *   2   0/1 1/1
 *   4   0/1 1/3 1/2 2/3 1/1 
+*   0   undefined
+*   1   undefined
 */
 #include <iostream>
 using std::cin;
