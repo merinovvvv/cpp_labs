@@ -1,0 +1,13 @@
+#include "iodata.h"
+#include <fstream>
+
+void readData(std::vector <std::string>& list, const std::string& filePath)
+{
+	std::string str;
+	std::ifstream fin(filePath, std::ios::in);
+	while (!fin.eof()) {
+		fin >> str;
+		list.push_back(str);
+	}
+	fin.close();
+}
