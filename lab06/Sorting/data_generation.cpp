@@ -16,9 +16,10 @@ std::vector <int> generateDataAscending(size_t amount)
 std::vector <int> generateDataDescending(size_t amount)
 {
 	std::vector <int> list(amount);
-	int value = 0;
-	for (auto iterator = list.rbegin(); iterator != list.rend(); ++iterator, ++value) {
-		*iterator = value;
+	int value = amount;
+	for (auto& item : list) {
+		item = value;
+		value--;
 	}
 	return list;
 }

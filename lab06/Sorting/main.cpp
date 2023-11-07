@@ -10,16 +10,15 @@ using namespace std::chrono;
 
 int main()
 {
-	std::cout << "Input the upper ceil: ";
+	/*std::cout << "Input the upper ceil: ";
 	int up;
 	std::cin >> up;
-	std::vector <int> list = generateDataRandom(180, up);
+	std::vector <int> list = generateDataRandom(10, up);*/
 	/*std::vector <int> list = generateDataDescending(42);*/
-	/*std::vector <int> list = generateDataAscending(42);*/
-	//readData(list, "data/input.txt");
+	std::vector <int> list = generateDataAscending(10);
 	std::cout << "\n";
 	auto start = system_clock::now();
-	bubbleSort(list);
+	insertionSort(list);
 	auto end = system_clock::now();
 	auto elapsed_seconds = duration_cast<seconds>(end - start).count();
 	auto elapsed_milliseconds = duration_cast<milliseconds>(end - start).count();
@@ -27,6 +26,7 @@ int main()
 #pragma warning(suppress : 4996)
 	std::cout << "Calculations are finished on " << std::ctime(&end_time) << "Algorithm execution time: "
 		<< elapsed_seconds << "s\n" << "Algorithm execution time: " << elapsed_milliseconds << "ms\n";
+	sortCount(list);
 }
 /*writeData(list, "data/SelectionSort.txt");
 insertionSort(list);

@@ -6,14 +6,29 @@
 
 template<typename T>
 void insertionSort(std::vector<T>& a) {
+	int exchCount = 0;
+	int compCount = 0;
 	for (size_t i = 1; i < a.size(); i++) {
 		for (size_t j = i; j > 0 && a[j - 1] > a[j]; j--) {// пока j>0 и элемент j-1 > j
 			std::swap(a[j - 1], a[j]);
+			exchCount++;
 		}
 	}// меняем местами элементы j и j-1
 }
 
-
+template<typename T>
+void sortCount(std::vector<T>& a) {
+	int exchCount = 0;
+	int compCount = 0;
+	for (size_t i = 1; i < a.size(); i++) {
+		for (size_t j = i; j > 0 && ++compCount && a[j - 1] > a[j]; j--) {// пока j>0 и элемент j-1 > j
+			std::swap(a[j - 1], a[j]);
+			exchCount++;
+		}
+	}// меняем местами элементы j и j-1
+	std::cout << compCount << "\n";
+	std::cout << exchCount;
+}
 
 template<typename T>
 void shellSort(std::vector<T>& a) {
