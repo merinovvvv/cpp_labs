@@ -3,6 +3,7 @@
 #include "ProgramCountriesPopulation.h"
 #include "Country.h"
 #include "WorldPopulation.h"
+#include "CountryFeature.h"
 
 int ProgramCountriesPopulation::main() {
 	try {
@@ -12,6 +13,8 @@ int ProgramCountriesPopulation::main() {
 		wp.calcWorldPopulation();
 		wp.writeWorldPopulationToFile("data/worldPopulation.csv", ';');
 		return 0;
+		CountryFeature cf;
+		cf.countryCollection("data/countries.csv");
 	}
 	catch (std::invalid_argument &ex) {
 		std::cerr << ex.what();

@@ -2,15 +2,15 @@
 #ifndef COUNTRY_FEATURE_H_
 #define COUNTRY_FEATURE_H_
 #include <string>
+#include <vector>
 
 class CountryFeature
 {
-private:
+public:
 	std::string countryCode;
 	std::string region;
 	std::string incomeGroup;
-public:
-	std::string getCountryCode();
-	void setCountryCode(std::string code);
+
+	void countryCollection(std::string filePath);
 };
 #endif //COUNTRY_FEATURE_H_
