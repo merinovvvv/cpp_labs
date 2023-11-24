@@ -17,7 +17,7 @@ public:
 
     RationalNumber<T>& operator- ();
     RationalNumber<T> operator- (const RationalNumber<T>& other) const;
-    friend RationalNumber<T> operator- (const T& other, const RationalNumber<T>& fraction2);
+    //friend RationalNumber<T> operator- (const T& other, const RationalNumber<T>& fraction2);
 
     RationalNumber<T> operator* (const RationalNumber<T>& other) const;
     friend RationalNumber<T> operator* (const T& other, const RationalNumber<T>& fraction2);
@@ -108,8 +108,11 @@ RationalNumber<T>& RationalNumber<T>::operator+ () {
 
 template <typename T>
 RationalNumber<T> RationalNumber<T>::operator+ (const RationalNumber<T>& other) const {
-    auto temp = *this;
-    return temp += other;
+    RationalNumber<T> result(*this);
+    result.denominator_ = denominator_ * other.denominator_;
+    result.numerator_ = numerator_ * other.denominator_ + other.numerator_ * denominator_;
+    result.reduction();
+    return result;
 }
 
 template <typename T>
@@ -171,16 +174,13 @@ RationalNumber<T> operator/ (const T& other, const RationalNumber<T>& fraction2)
 
 template <typename T>
 RationalNumber<T>& RationalNumber<T>::operator+=(const RationalNumber<T>& other) {
-    denominator_ = denominator_ * other.denominator_;
-    numerator_ = numerator_ * other.denominator_ + other.numerator_ * denominator_ / other.denominator_;
-    reduction();
-    return *this;
+    return *this = *this + other;
 }
 
 template <typename T>
 RationalNumber<T>& RationalNumber<T>::operator-=(const RationalNumber<T>& other) {
     denominator_ = denominator_ * other.denominator_;
-    numerator_ = numerator_ * other.denominator_ + other.numerator_ * denominator_ / other.denominator_;
+    numerator_ = numerator_ * other.denominator_ - other.numerator_ * denominator_ / other.denominator_;
     reduction();
     return *this;
 }
@@ -284,19 +284,17 @@ bool operator>= (const T& other, const RationalNumber<T>& fraction2) {
 template <typename T>
 RationalNumber<T>& RationalNumber<T>::operator++ () {
     RationalNumber <T> res;
-    res.numerator_ = 1;
-    res.denominator_ = 1;
-    this->Sum(res);
-    return *this;
+    res.numerator_ = denominator_;
+    res.denominator_ = denominator_;
+    return *this = *this + res;
 }
 
 template <typename T>
 RationalNumber<T>& RationalNumber<T>::operator-- () {
     RationalNumber <T> res;
-    res.numerator_ = 1;
-    res.denominator_ = 1;
-    this->Subtraction(res);
-    return *this;
+    res.numerator_ = denominator_;
+    res.denominator_ = denominator_;
+    return *this = *this - res;
 }
 
 template <typename U>

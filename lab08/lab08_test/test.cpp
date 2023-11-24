@@ -113,7 +113,7 @@ TEST(RationalNumberTest, CompoundAdditionOperator) {
 
     fraction1 += fraction2;
 
-    EXPECT_EQ(fraction1, RationalNumber<int>(11, 12));
+    EXPECT_EQ(fraction1, RationalNumber<int>(5, 4));
 }
 
 TEST(RationalNumberTest, CompoundSubtractionOperator) {
