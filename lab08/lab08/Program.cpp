@@ -24,9 +24,6 @@ void Program::workShow() {
 	RationalNumber <int> fraction2(num2, den2);
 	RationalNumber <int> fractionTest;
 
-	std::cout << "initial fractions:" << '\n' << "first : " << num1 << '/' << den1 << 
-		" second : " << num2 << '/' << den2 << '\n' << "results : \n";
-
 	std::cout << "fraction1 OPERATION fraction2, if operation is unary (un) it is used for the first fraction\n\n";
 	std::cout << "+(un)\t" << +fraction1 << '\n';
 	fractionTest = fraction1 + fraction2;

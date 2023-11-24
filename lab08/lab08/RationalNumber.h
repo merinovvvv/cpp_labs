@@ -3,6 +3,7 @@
 #define RATIONAL_NUMBER_H_
 
 #include <iostream>
+#include <numeric>
 
 template<class T>
 class RationalNumber {
@@ -72,6 +73,20 @@ public:
 			if (denominator == 0) {
 				throw std::invalid_argument("Denominator cannot be zero");
 			}
+			else if (denominator_ < 0 && numerator_ < 0) {
+				// Убираем минус из знаменателя и числителя
+				std::cout << "Minuses in both numerator and denominator.\n\n";
+				numerator_ = -numerator_;
+				denominator_ = -denominator_;
+				std::cout << "The fraction looks like: " << numerator_ << '/' << denominator_ << '\n';
+			}
+			else if (denominator_ < 0 && numerator_ > 0) {
+				// Переносим минус из знаменателя в числитель
+				std::cout << "Wrong denominator, the minus will go to the numerator.\n";
+				numerator_ = -numerator_;
+				denominator_ = -denominator_;
+				std::cout << "The fraction looks like: " << numerator_ << '/' << denominator_ << '\n';
+			}
 			reduction();
 		}
 		catch (const std::exception& e) {
@@ -108,17 +123,6 @@ public:
 template <typename T>
 RationalNumber<T>::RationalNumber(const RationalNumber<T>& other)
 	: numerator_(other.numerator_), denominator_(other.denominator_) {}
-
-template <typename T>
-T RationalNumber<T>::gcd(T a, T b) {
-	while (b != 0) {
-		T temp = b;
-		b = a % b;
-		a = temp;
-	}
-	return a;
-}
-
 
 template <typename T>
 RationalNumber<T>& RationalNumber<T>::operator+ () {
@@ -445,7 +449,7 @@ RationalNumber<T>& RationalNumber<T>::operator= (const RationalNumber<T>& other)
 
 template <typename T>
 void RationalNumber<T>::reduction() {
-	T g = gcd(denominator_, numerator_);
+	T g = std::gcd(denominator_, numerator_);
 	denominator_ /= g;
 	numerator_ /= g;
 }
