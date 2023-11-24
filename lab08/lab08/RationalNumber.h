@@ -71,7 +71,7 @@ public:
 	RationalNumber(T numerator, T denominator) : numerator_(numerator), denominator_(denominator) {
 		try {
 			if (denominator == 0) {
-				throw std::invalid_argument("Denominator cannot be zero");
+				throw std::invalid_argument("Denominator can't be zero (or not a number at all)");
 			}
 			else if (denominator_ < 0 && numerator_ < 0) {
 				// Убираем минус из знаменателя и числителя
@@ -89,7 +89,7 @@ public:
 			}
 			if (numerator_ == 0)
 			{
-				std::cout << "Numerator equals to 0 -> denominator = 1.";
+				std::cout << "the numerator of one of the fractions equals to 0 -> it's denominator = 1.\n";
 				denominator_ = 1;
 			}
 			reduction();
