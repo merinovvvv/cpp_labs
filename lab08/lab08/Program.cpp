@@ -3,13 +3,30 @@
 #include "Program.h"
 
 void Program::workShow() {
-	RationalNumber <int> fraction1 (4, 2);
-	RationalNumber <int> fraction2(1, 4);
 
+	auto num1 = 0;
+	std::cout << "Input the numerator of the 1st fraction: ";
+	std::cin >> num1;
 
-	std::cout << fraction1 + fraction2 << '\n';
+	auto den1 = 0;
+	std::cout << "Input the denominator of the 1st fraction: ";
+	std::cin >> den1;
+
+	auto num2 = 0;
+	std::cout << "Input the numerator of the 2nd fraction: ";
+	std::cin >> num2;
+
+	auto den2 = 0;
+	std::cout << "Input the denominator of the 2nd fraction: ";
+	std::cin >> den2;
+
+	RationalNumber <int> fraction1 (num1, den1);
+	RationalNumber <int> fraction2(num2, den2);
 	RationalNumber <int> fractionTest;
-	std::cout << "initial fractions:" << '\n' << "first : 4/2, second : 1/4" << '\n' << "results:\n";
+
+	std::cout << "initial fractions:" << '\n' << "first : " << num1 << '/' << den1 << 
+		" second : " << num2 << '/' << den2 << '\n' << "results : \n";
+
 	std::cout << "fraction1 OPERATION fraction2, if operation is unary (un) it is used for the first fraction\n\n";
 	std::cout << "+(un)\t" << +fraction1 << '\n';
 	fractionTest = fraction1 + fraction2;
