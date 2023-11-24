@@ -87,6 +87,11 @@ public:
 				denominator_ = -denominator_;
 				std::cout << "The fraction looks like: " << numerator_ << '/' << denominator_ << '\n';
 			}
+			if (numerator_ == 0)
+			{
+				std::cout << "Numerator equals to 0 -> denominator = 1.";
+				denominator_ = 1;
+			}
 			reduction();
 		}
 		catch (const std::exception& e) {
@@ -111,7 +116,6 @@ private:
 	T denominator_;
 
 	void reduction();
-	T gcd(T a, T b);
 
 public:
 	RationalNumber Sum(RationalNumber<T> other);
