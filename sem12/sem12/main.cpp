@@ -17,4 +17,5 @@ int main() {
     std::cout << "Matrix multiplication:\n";
     result_matrix->show();
     return 0;
+
 }

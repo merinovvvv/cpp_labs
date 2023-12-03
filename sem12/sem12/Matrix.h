@@ -10,6 +10,10 @@ private:
 public:
 	Matrix();
 	~Matrix();
+	Matrix(const Matrix& other);
+	Matrix(Matrix&& other) noexcept;
+	Matrix operator= (const Matrix& other);
+	Matrix operator= (Matrix&& other) noexcept;
 	Matrix(const int n, const int m);
 	Matrix(const int n, const int m, const int k);
 	int GetN();
@@ -19,4 +23,4 @@ public:
 };
 
 #endif //DEMOMATRIX_SRC_MATRIX_H_
-#pragma once
+
