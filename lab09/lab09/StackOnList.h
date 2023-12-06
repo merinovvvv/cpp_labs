@@ -18,11 +18,11 @@ public:
 private:
 	struct Node
 	{
+		int key_;
+		Node* next_;
 		Node() : next_(nullptr) {}
 		Node(int key) : key_(key), next_(nullptr) {}
 		Node(int key, Node* next) : key_(key), next_(next) {}
-		int key_;
-		Node* next_;
 	};
 	Node* top_;
 };
