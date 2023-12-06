@@ -2,7 +2,7 @@
 #include "Matrix.h"
 
 int main() {
-    std::cout << "Matrix - The first vertion:\n";
+    /*std::cout << "Matrix - The first vertion:\n";
     int n = 2, m = 3, l = 4;
     Matrix* first_matrix = new Matrix(n, m);
     Matrix* second_matrix = new Matrix(m, l);
@@ -15,7 +15,10 @@ int main() {
         }
     }
     std::cout << "Matrix multiplication:\n";
-    result_matrix->show();
-    return 0;
-
+    result_matrix->show();*/
+    Matrix a(5, 4);
+    std::cout << a;
+    std::cout << '\n';
+    std::cout << (a / 0);
+    std::cout << '\n' << '\n';
 }

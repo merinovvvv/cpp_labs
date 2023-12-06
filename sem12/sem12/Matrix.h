@@ -20,6 +20,18 @@ public:
 	int GetM();
 	int** GetA();
 	void show();
+	Matrix operator+ (const Matrix& other) const;
+	Matrix operator- (const Matrix& other) const;
+	Matrix operator* (const int& other) const;
+	Matrix operator/ (const int& other) const;
+	Matrix operator+= (const Matrix& other);
+	Matrix operator-= (const Matrix& other);
+	Matrix operator*= (const int& other);
+	Matrix operator/= (const int& other);
+	bool operator== (const Matrix& other) const;
+	bool operator!= (const Matrix& other) const;
+	friend std::ostream& operator<< (std::ostream& stream, const Matrix& matrix);
+	friend std::istream& operator>> (std::istream& in, const Matrix& matrix);
 };
 
 #endif //DEMOMATRIX_SRC_MATRIX_H_

@@ -1,12 +1,12 @@
 #include <cstdlib>
 #include <iostream>
 #include <cmath>
-#include <ctime>
 
 #include "Matrix.h"
 
 // Генерируем рандомное число между значениями min и max
 // Предполагается, что функцию srand() уже вызывали
+
 int RandomNumber(int min, int max)
 {
 	static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0);
@@ -44,7 +44,6 @@ Matrix::Matrix(const int n, const int m) {
 			a_[i][j] = (int)(RandomNumber(0, 100));
 		}
 	}
-	show();
 }
 Matrix::Matrix(const int n, const int m, const int k) {
 	n_ = n;
@@ -62,7 +61,6 @@ Matrix::Matrix(const int n, const int m, const int k) {
 		}
 	}
 	if (k != 0) {
-		show();
 	}
 }
 
