@@ -1,13 +1,15 @@
 #ifndef DEMOMATRIX_SRC_MATRIX_H_
 #define DEMOMATRIX_SRC_MATRIX_H_
+#include "spdlog/spdlog.h"
 
+class Matrix{
 
-class Matrix {
 private:
 	int** a_;
 	int n_;
 	int m_;
 public:
+	friend class MatrixService;
 	Matrix();
 	~Matrix();
 	Matrix(const Matrix& other);
@@ -32,7 +34,14 @@ public:
 	bool operator!= (const Matrix& other) const;
 	friend std::ostream& operator<< (std::ostream& stream, const Matrix& matrix);
 	friend std::istream& operator>> (std::istream& in, const Matrix& matrix);
+	/*Matrix trans();*/
 };
+
+class MatrixService {
+public:
+	Matrix trans(Matrix& a);
+};
+
 
 #endif //DEMOMATRIX_SRC_MATRIX_H_
 

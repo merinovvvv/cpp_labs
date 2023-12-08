@@ -1,11 +1,22 @@
 #include <cstdlib>
 #include <iostream>
 #include <cmath>
+#include <algorithm>
 
 #include "Matrix.h"
 
 // Генерируем рандомное число между значениями min и max
 // Предполагается, что функцию srand() уже вызывали
+
+Matrix MatrixService::trans(Matrix& a) {
+	for (int i = 0; i < a.n_; i++) {
+		for (int j = i + 1; j < a.m_; j++) {  // Изменение условия и начала вложенного цикла
+			std::swap(a.a_[i][j], a.a_[j][i]);
+		}
+	}
+	std::swap(a.n_, a.m_);  // Обмен размерностей матрицы
+	return a;
+}
 
 int RandomNumber(int min, int max)
 {
@@ -80,6 +91,7 @@ Matrix::Matrix(const Matrix& other) {
 }
 
 Matrix Matrix::operator=(const Matrix& other) {
+	spdlog::get("console")->info("loggers can be retrieved from a global registry using the spdlog::get(logger_name)");
 
 	if (this == &other) {
 		return *this;
@@ -112,8 +124,8 @@ Matrix::Matrix(Matrix&& other) noexcept {
 	other.a_ = nullptr;
 }
 
-Matrix Matrix::operator=(Matrix&& other) noexcept{
-	
+Matrix Matrix::operator=(Matrix&& other) noexcept {
+
 	if (this != &other || this != nullptr) {
 		delete[] this;
 	}
