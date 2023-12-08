@@ -1,6 +1,9 @@
-#pragma once
 #ifndef STACK_ON_LIST_H_
-#define STACK_ON_LIST__H
+#define STACK_ON_LIST_H_
+
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
+
 class StackOnList
 {
 public:
@@ -20,12 +23,21 @@ private:
 	{
 		int key_;
 		Node* next_;
-		Node() : next_(nullptr) {}
-		Node(int key) : key_(key), next_(nullptr) {}
-		Node(int key, Node* next) : key_(key), next_(next) {}
+		Node() : next_(nullptr) {
+			spdlog::trace("Node default costr.");
+		}
+		Node(int key) : key_(key), next_(nullptr) {
+			spdlog::trace("Node costr with nullptr.");
+
+		}
+		Node(int key, Node* next) : key_(key), next_(next) {
+			spdlog::trace("Node costr.");
+		}
 	};
 	Node* top_;
+	static std::shared_ptr<spdlog::logger> logger ;
 };
+	std::shared_ptr<spdlog::logger> StackOnList::logger = spdlog::stdout_color_mt("StackOnList");
 
 StackOnList::StackOnList() : top_(nullptr) {}
 StackOnList::~StackOnList() {
@@ -34,8 +46,11 @@ StackOnList::~StackOnList() {
 	}
 }
 void StackOnList::push(int value) {
+	logger->trace("StackOnList::push.");
 	Node* tmp = new Node(value, top_);
 	top_ = tmp;
+
+	logger->debug("The {0} has been pushed to {1}.", value, tmp->key_);
 }
 
 int StackOnList::pop() {
@@ -46,7 +61,7 @@ int StackOnList::pop() {
 	return result;
 }
 
-bool StackOnList::isEmpty() const{
+bool StackOnList::isEmpty() const {
 	return (top_ == nullptr);
 }
 
