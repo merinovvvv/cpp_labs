@@ -74,14 +74,14 @@ public:
 				throw std::invalid_argument("Denominator can't be zero (or not a number at all)");
 			}
 			else if (denominator_ < 0 && numerator_ < 0) {
-				// Убираем минус из знаменателя и числителя
+				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				std::cout << "Minuses in both numerator and denominator.\n\n";
 				numerator_ = -numerator_;
 				denominator_ = -denominator_;
 				std::cout << "The fraction looks like: " << numerator_ << '/' << denominator_ << '\n';
 			}
 			else if (denominator_ < 0 && numerator_ > 0) {
-				// Переносим минус из знаменателя в числитель
+				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				std::cout << "Wrong denominator, the minus will go to the numerator.\n";
 				numerator_ = -numerator_;
 				denominator_ = -denominator_;
@@ -95,7 +95,7 @@ public:
 			reduction();
 		}
 		catch (const std::exception& e) {
-			// Обработка исключения
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			std::cerr << "Error during object creation: " << e.what() << std::endl;
 			exit(0);
 		}
@@ -105,10 +105,10 @@ public:
 
 	RationalNumber(const RationalNumber<T>& other);
 
-	// Конструктор перемещения
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	RationalNumber(RationalNumber<T>&& other) noexcept = default;
 
-	// Оператор перемещения
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	RationalNumber<T>& operator=(RationalNumber<T>&& other) noexcept = default;
 
 private:
@@ -228,7 +228,7 @@ RationalNumber<T> RationalNumber<T>::operator/ (const RationalNumber<T>& other) 
 		result.reduction();
 	}
 	catch (const std::exception& e) {
-		// Обработка исключения
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		std::cerr << "Error during division: " << e.what() << std::endl;
 		exit(0);
 	}
@@ -255,7 +255,7 @@ RationalNumber<T> operator/ (const RationalNumber<T>& fraction1, const T& other)
 		}
 	}
 	catch (const std::exception& e) {
-		// Обработка исключения
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		std::cerr << "Error during division: " << e.what() << std::endl;
 		exit(0);
 	}
@@ -286,7 +286,7 @@ RationalNumber<T>& RationalNumber<T>::operator/= (const RationalNumber<T>& other
 		*this = *this / other;
 	}
 	catch (const std::exception& e) {
-		// Обработка исключения
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		std::cerr << "Error during division: " << e.what() << std::endl;
 		exit(0);
 	}
@@ -391,6 +391,7 @@ bool operator<= (const T& other, const RationalNumber<T>& fraction2) {
 	return (fr < fraction2 || fr == fraction2);
 }
 
+
 template <typename T>
 bool operator<= (const RationalNumber<T>& fraction2, const T& other) {
 	RationalNumber <T> fr;
@@ -454,7 +455,6 @@ RationalNumber<T>& RationalNumber<T>::operator= (const RationalNumber<T>& other)
 template <typename T>
 void RationalNumber<T>::reduction() {
 	T g = std::gcd(denominator_, numerator_);
-	denominator_ /= g;
 	numerator_ /= g;
 }
 
