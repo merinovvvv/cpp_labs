@@ -1,0 +1,37 @@
+[%y:12:14] [10:37:33 +03:00] [log-file] [---C---] [thread 13036] critical
+[%y:12:14] [10:37:33 +03:00] [log-file] [---E---] [thread 13036] error
+[%y:12:14] [10:37:33 +03:00] [log-file] [---W---] [thread 13036] warn
+[%y:12:14] [10:37:33 +03:00] [log-file] [---I---] [thread 13036] info
+[%y:12:14] [10:43:34 +03:00] [log-file] [---C---] [thread 15212] critical
+[%y:12:14] [10:43:34 +03:00] [log-file] [---E---] [thread 15212] error
+[%y:12:14] [10:43:53 +03:00] [log-file] [---C---] [thread 19432] critical
+[%y:12:14] [10:43:53 +03:00] [log-file] [---E---] [thread 19432] error
+[%y:12:14] [10:44:55 +03:00] [log-file] [---C---] [thread 8768] critical
+[%y:12:14] [10:44:55 +03:00] [log-file] [---E---] [thread 8768] error
+[2023:12:14] [10:46:32 +03:00] [log-file] [---C---] [thread 14280] critical
+[2023:12:14] [10:46:32 +03:00] [log-file] [---E---] [thread 14280] error
+[2023:12:14] [10:50:38 +03:00] [log-file] [---C---] [thread 7684] critical
+[2023:12:14] [10:50:38 +03:00] [log-file] [---E---] [thread 7684] error
+[2023:12:14] [10:52:08 +03:00] [log-file] [---C---] [thread 13804] critical
+[2023:12:14] [10:52:08 +03:00] [log-file] [---E---] [thread 13804] error
+[2023:12:14] [10:52:47 +03:00] [log-file] [---C---] [thread 6596] critical
+[2023:12:14] [10:52:47 +03:00] [log-file] [---E---] [thread 6596] error
+[2023:12:14] [10:52:47 +03:00] [log-file] [---W---] [thread 6596] warn
+[2023:12:14] [10:52:47 +03:00] [log-file] [---I---] [thread 6596] info
+[2023:12:14] [10:52:47 +03:00] [log-file] [---D---] [thread 6596] debug
+[2023:12:14] [10:52:47 +03:00] [log-file] [---T---] [thread 6596] trace
+[2023:12:14] [11:43:07 +03:00] [stackOnList-logger] [---D---] Stack is created
+[2023:12:14] [11:43:07 +03:00] [stackOnList-logger] [---T---] StackOnList::push.
+[2023:12:14] [11:43:07 +03:00] [stackOnList-logger] [---D---] The 1 has been pushed to 1.
+[2023:12:14] [11:43:07 +03:00] [stackOnList-logger] [---T---] StackOnList::push.
+[2023:12:14] [11:43:07 +03:00] [stackOnList-logger] [---D---] The 2 has been pushed to 2.
+[2023:12:14] [11:43:07 +03:00] [stackOnList-logger] [---T---] StackOnList::push.
+[2023:12:14] [11:43:07 +03:00] [stackOnList-logger] [---D---] The 3 has been pushed to 3.
+[2023:12:14] [11:43:07 +03:00] [log-file] [---I---] Application started
+[2023:12:14] [11:43:07 +03:00] [log-file] [---I---] Application finished
+[2023:12:14] [12:09:37 +03:00] [default log-file] [---I---] Application started
+[2023:12:14] [12:09:37 +03:00] [stackOnList-logger] [---D---] Stack is created
+[2023:12:14] [12:09:37 +03:00] [stackOnList-logger] [---W---] No elements.
+[2023:12:14] [12:10:01 +03:00] [default log-file] [---I---] Application started
+[2023:12:14] [12:10:01 +03:00] [stackOnList-logger] [---D---] Stack is created
+[2023:12:14] [12:10:01 +03:00] [stackOnList-logger] [---W---] No elements.

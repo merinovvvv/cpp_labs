@@ -1,8 +1,9 @@
 #ifndef STACK_ON_LIST_H_
 #define STACK_ON_LIST_H_
 
+#include <exception>
 #include "spdlog/spdlog.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
+#include "spdlog/sinks/basic_file_sink.h"
 
 class StackOnList
 {
@@ -35,11 +36,13 @@ private:
 		}
 	};
 	Node* top_;
-	static std::shared_ptr<spdlog::logger> logger ;
+	static std::shared_ptr<spdlog::logger> logger;
 };
-	std::shared_ptr<spdlog::logger> StackOnList::logger = spdlog::stdout_color_mt("StackOnList");
+std::shared_ptr<spdlog::logger> StackOnList::logger = spdlog::basic_logger_mt("stackOnList-logger", "logs/basic-log.txt");
 
-StackOnList::StackOnList() : top_(nullptr) {}
+StackOnList::StackOnList() : top_(nullptr) {
+	logger->debug("Stack is created");
+}
 StackOnList::~StackOnList() {
 	while (top_) {
 		pop();
@@ -66,6 +69,10 @@ bool StackOnList::isEmpty() const {
 }
 
 int StackOnList::top() const {
+	if (!top_) {
+		logger->warn("No elements.");
+		throw std::logic_error ("No elements in stack.");
+	}
 	return top_->key_;
 }
 
