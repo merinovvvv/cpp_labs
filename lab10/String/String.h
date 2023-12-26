@@ -25,11 +25,11 @@ public:
 	void push_back(char ch);
 	void pop_back();
 	void clear();
-	void insert(int index, const String& str);
-	void insert(int index, const char* str, int count);
-	void erase(int index, int count = 1);
+	bool insert(int index, const String& str);
+	bool insert(int index, const char* str, int count);
+	bool erase(int index, int count = 1);
 	String operator+ (const String& other);
-	String operator+= (const String& other);
+	String& operator+= (const String& other);
 	int compare(const String& str) const;
 	int compare(const char* str) const;
 	bool operator< (const String& other) const;

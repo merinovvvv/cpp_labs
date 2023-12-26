@@ -3,8 +3,12 @@
 #include "String.h"
 
 String::String() {
-	str = nullptr;
+	size = 0;
+	capacity = 16;
+	str = new char[capacity];
+	str[0] = '\0';
 }
+
 String::String(const char* other) {
 	size = strlen(other);
 	str = new char[size + 1];
@@ -13,13 +17,16 @@ String::String(const char* other) {
 	}
 	str[size] = '\0';
 }
+
 String::String(int count, char ch) {
+	size = count;
 	str = new char[count + 1];
 	for (size_t i = 0; i < count; ++i) {
 		str[i] = ch;
 	}
 	str[count] = '\0';
 }
+
 
 String::String(const String& other) {
 	size = other.size;
@@ -98,18 +105,21 @@ const char& String::operator[](int index) const {
 }
 
 char& String::front() {
-	if (str == nullptr) {
+	if (str == nullptr || size == 0) {
 		std::cout << "The string is empty.";
+		exit(0);
 	}
 	return str[0];
 }
 
 char& String::back() {
-	if (str == nullptr) {
+	if (str == nullptr || size == 0) {
 		std::cout << "The string is empty.";
+		exit(0);
 	}
-	return str[size];
+	return str[size - 1];
 }
+
 
 const char& String::front() const {
 	if (str == nullptr) {
@@ -147,15 +157,16 @@ void String::push_back(char ch) {
 	else {
 		capacity = capacity * 2;
 		char* str2 = new char[capacity];
-		for (size_t i = 0; i < capacity; ++i) {
+		for (size_t i = 0; i < size; ++i) {
 			str2[i] = str[i];
 		}
 		delete[] str;
 		str = str2;
 		str[size] = ch;
-		++size;
 	}
+	++size;
 }
+
 
 void String::pop_back() {
 	if (size > 0) {
@@ -177,56 +188,70 @@ void String::clear() {
 	}
 }
 
-void String::insert(int index, const String& str) { //TODO
+bool String::insert(int index, const String& str) {
 	if (index < 0 || index > size) {
-		std::cout << "Invalid index. Insertion failed." << std::endl;
+		return false;
 	}
+
 	int newSize = size + str.size;
 	char* buffer = new char[newSize + 1];
+
 	for (size_t i = 0; i < index; ++i) {
 		buffer[i] = this->str[i];
 	}
 
-	for (size_t i = 0; i < str.size; ++i) {
-		buffer[index + i] = str[i];
+	for (size_t i = 0; i < str.size; ++i, ++index) {
+		buffer[index] = str[i];
 	}
 
-	for (size_t i = index; i < size; ++i) { //QUESTION
-		buffer[str.size + i] = this->str[i];
+	for (size_t i = index - str.size; i < size; ++i) {
+		buffer[index] = this->str[i];
+		++index;
 	}
-	buffer[size] = '\0';
+
+	buffer[newSize] = '\0';
 	delete[] this->str;
 	this->str = buffer;
 	size = newSize;
+
+	return true;
 }
 
-void String::insert(int index, const char* str, int count) { //TODO
+bool String::insert(int index, const char* str, int count) {
 	if (index < 0 || index > size) {
-		std::cout << "Invalid index. Insertion failed." << std::endl;
+		return false;
 	}
+
 	int newSize = size + count;
 	char* buffer = new char[newSize + 1];
+
 	for (size_t i = 0; i < index; ++i) {
 		buffer[i] = this->str[i];
 	}
 
-	for (size_t i = 0; i < count; ++i) {
-		buffer[index + i] = str[i];
+	for (size_t i = 0; i < count; ++i, ++index) {
+		buffer[index] = str[i];
 	}
 
-	for (size_t i = index; i < size; ++i) {
-		buffer[count + i] = this->str[i];
+	for (size_t i = index - count; i < size; ++i) {
+		buffer[index] = this->str[i];
+		++index;
 	}
-	buffer[size] = '\0';
+
+	buffer[newSize] = '\0';
 	delete[] this->str;
 	this->str = buffer;
 	size = newSize;
+
+	return true;
 }
 
-void String::erase(int index, int count) {
+bool String::erase(int index, int count) {
+
 	if (index < 0 || index >= size || count <= 0) {
-		std::cout << "Invalid index or count. Erase failed." << std::endl;
+		return false;
 	}
+		
 	int deleteCount = std::min(count, size - index);
 	int newSize = size - deleteCount;
 
@@ -234,36 +259,46 @@ void String::erase(int index, int count) {
 	for (size_t i = 0; i < index; ++i) {
 		buffer[i] = str[i];
 	}
-	for (size_t i = index + deleteCount, j = index; i < newSize; ++i, ++j) { //QUESTION
+	for (size_t i = index + deleteCount, j = index; i < size; ++i, ++j) {
 		buffer[j] = str[i];
 	}
 	buffer[newSize] = '\0';
 	delete[] str;
 	str = buffer;
 	size = newSize;
+
+	return true;
 }
 
 String String::operator+ (const String& other) {
 	int newSize = size + other.size;
-	char* newBuffer = new char[newSize];
+	char* newBuffer = new char[newSize + 1];
+
 	for (size_t i = 0; i < size; ++i) {
 		newBuffer[i] = str[i];
 	}
-	for (size_t j = size; j < other.size; ++j) {
-		newBuffer[j] = other.str[j];
+
+	for (size_t j = 0; j < other.size; ++j) {
+		newBuffer[size + j] = other.str[j];
 	}
+
 	newBuffer[newSize] = '\0';
-	return String(newBuffer);
+
+	String result(newBuffer);
+
+	delete[] newBuffer;
+
+	return result;
 }
 
-String String::operator+= (const String& other) {
-	size += other.size;
-	if (size >= capacity) {
-		capacity = capacity * 2;
+
+String& String::operator+=(const String& other) {
+	if (&other != this) {
+		*this = *this + other;
 	}
-	*this = *this + other;
 	return *this;
 }
+
 
 int String::compare(const String& str) const {
 	for (size_t i = 0; i < size && i < str.size; ++i) {
@@ -277,12 +312,10 @@ int String::compare(const String& str) const {
 	if (size < str.size) {
 		return -1;
 	}
-	else if (size > str.size) {
+	if (size > str.size) {
 		return 1;
 	}
-	else {
-		return 0;
-	}
+	return 0;
 }
 
 int String::compare(const char* str) const {
@@ -296,7 +329,7 @@ int String::compare(const char* str) const {
 		}
 	}
 
-	if (size < i) {
+	/*if (size < i) {
 		return -1;
 	}
 	else if (size > i || str[i] != '\0') {
@@ -304,7 +337,17 @@ int String::compare(const char* str) const {
 	}
 	else {
 		return 0;
+	}*/
+
+	if (i == size) {
+		return 0;
 	}
+
+	if (size > i) {
+		return 1;
+	}
+
+	return -1;
 }
 
 
@@ -318,19 +361,19 @@ bool String::operator!=(const char* other) const {
 }
 
 bool String::operator<(const char* other) const {
-	return compare(other) < 0;
+	return compare(other) == -1;
 }
 
 bool String::operator<=(const char* other) const {
-	return compare(other) <= 0;
+	return compare(other) != 1;
 }
 
 bool String::operator>(const char* other) const {
-	return compare(other) > 0;
+	return compare(other) == 1;
 }
 
 bool String::operator>=(const char* other) const {
-	return compare(other) >= 0;
+	return compare(other) != -1;
 }
 
 // Перегрузка операторов сравнения для String
@@ -343,19 +386,19 @@ bool String::operator!=(const String& other) const {
 }
 
 bool String::operator<(const String& other) const {
-	return compare(other) < 0;
+	return compare(other) == -1;
 }
 
 bool String::operator<=(const String& other) const {
-	return compare(other) <= 0;
+	return compare(other) != 1;
 }
 
 bool String::operator>(const String& other) const {
-	return compare(other) > 0;
+	return compare(other) == 1;
 }
 
 bool String::operator>=(const String& other) const {
-	return compare(other) >= 0;
+	return compare(other) != -1;
 }
 
 // Перегрузка операторов сравнения для const char* и String
@@ -368,17 +411,17 @@ bool operator!=(const char* str, const String& other) {
 }
 
 bool operator<(const char* str, const String& other) {
-	return other.compare(str) > 0;
+	return other.compare(str) == -1;
 }
 
 bool operator<=(const char* str, const String& other) {
-	return other.compare(str) >= 0;
+	return other.compare(str) != 1;
 }
 
 bool operator>(const char* str, const String& other) {
-	return other.compare(str) < 0;
+	return other.compare(str) == -1;
 }
 
 bool operator>=(const char* str, const String& other) {
-	return other.compare(str) <= 0;
+	return other.compare(str) != 1;
 }
