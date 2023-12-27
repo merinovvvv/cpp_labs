@@ -13,6 +13,6 @@ void ElectricCar::engineOff() const{
 	spdlog::info("Electric car's engine is off");
 }
 std::string ElectricCar::toString() const{
-	spdlog::info("Electic car's toString func");
+	spdlog::debug("Electic car's toString func");
 	return Vehicle::toString() + " Seats number: " + std::to_string(seatsNumber_) + " Power reserve: " + std::to_string(powerReserve_);
 }
