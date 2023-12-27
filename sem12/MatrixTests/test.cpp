@@ -1,11 +1,11 @@
 #include "pch.h"
 #include "../sem12/Matrix.h"
-//
+
 TEST(TestCaseName, TestName) {
   EXPECT_EQ(1, 1);
   EXPECT_TRUE(true);
 }
-//
+
 //TEST(MatrixTest, DefaultConstructor) {
 //    Matrix matrix;
 //    EXPECT_EQ(matrix.GetN(), 0);
@@ -18,8 +18,8 @@ TEST(TestCaseName, TestName) {
 //    int m = 4;
 //    Matrix matrix(n, m);
 //
-//    EXPECT_EQ(matrix.GetN(), n);
-//    EXPECT_EQ(matrix.GetM(), m);
+//    EXPECT_EQ(matrix.GetN(), 3);
+//    EXPECT_EQ(matrix.GetM(), 4);
 //
 //    // Check if all elements are within the valid range (0 to 100)
 //    int** a = matrix.GetA();
@@ -37,8 +37,8 @@ TEST(TestCaseName, TestName) {
 //    int k = 5;
 //    Matrix matrix(n, m, k);
 //
-//    EXPECT_EQ(matrix.GetN(), n);
-//    EXPECT_EQ(matrix.GetM(), m);
+//    EXPECT_EQ(matrix.GetN(), 2);
+//    EXPECT_EQ(matrix.GetM(), 3);
 //
 //    // Check if all elements are equal to the constant value k
 //    int** a = matrix.GetA();
@@ -111,3 +111,4 @@ TEST(TestCaseName, TestName) {
 //    EXPECT_EQ(original.GetN(), 0);
 //    EXPECT_EQ(original.GetM(), 0);
 //    EXPECT_EQ(original.GetA(), nullptr);
+//    }
