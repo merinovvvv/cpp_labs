@@ -50,6 +50,10 @@ public:
 	friend bool operator<=(const char* str, const String& other);
 	friend bool operator>(const char* str, const String& other);
 	friend bool operator>=(const char* str, const String& other);
+
+	friend std::istream& operator>> (std::istream& is, String& other);
+	friend std::ostream& operator<< (std::ostream& os, const String& other);
+
 private:
 	char* str;
 	int size;

@@ -11,6 +11,9 @@ String::String() {
 
 String::String(const char* other) {
 	size = strlen(other);
+	if (size > capacity) {
+		capacity *= 2;
+	}
 	str = new char[size + 1];
 	for (size_t i = 0; i < size; ++i) {
 		str[i] = other[i];
@@ -20,6 +23,9 @@ String::String(const char* other) {
 
 String::String(int count, char ch) {
 	size = count;
+	if (size > capacity) {
+		capacity *= 2;
+	}
 	str = new char[count + 1];
 	for (size_t i = 0; i < count; ++i) {
 		str[i] = ch;
@@ -30,6 +36,9 @@ String::String(int count, char ch) {
 
 String::String(const String& other) {
 	size = other.size;
+	if (size > capacity) {
+		capacity *= 2;
+	}
 	str = new char[size + 1];
 	for (size_t i = 0; i < other.size; ++i) {
 		str[i] = other.str[i];
@@ -43,6 +52,7 @@ String String::operator=(const String& other) {
 			delete[] str;
 		}
 		size = other.size;
+		capacity = other.capacity;
 		str = new char[other.size + 1];
 		for (size_t i = 0; i < other.size; ++i) {
 			str[i] = other.str[i];
@@ -54,6 +64,7 @@ String String::operator=(const String& other) {
 
 String::String(String&& other) noexcept {
 	size = other.size;
+	capacity = other.capacity;
 	str = other.str;
 	other.str = nullptr;
 	other.size = 0;
@@ -63,6 +74,7 @@ String String::operator=(String&& other) noexcept {
 	if (str != other.str) {
 		delete[] str;
 		size = other.size;
+		capacity = other.capacity;
 		str = other.str;
 		other.str = nullptr;
 		other.size = 0;
@@ -106,7 +118,7 @@ const char& String::operator[](int index) const {
 
 char& String::front() {
 	if (str == nullptr || size == 0) {
-		std::cout << "The string is empty.";
+		throw std::logic_error("No elements in string.");
 		exit(0);
 	}
 	return str[0];
@@ -114,7 +126,7 @@ char& String::front() {
 
 char& String::back() {
 	if (str == nullptr || size == 0) {
-		std::cout << "The string is empty.";
+		throw std::logic_error("No elements in string.");
 		exit(0);
 	}
 	return str[size - 1];
@@ -123,36 +135,36 @@ char& String::back() {
 
 const char& String::front() const {
 	if (str == nullptr) {
-		std::cout << "The string is empty.";
+		throw std::logic_error("No elements in string.");
 	}
 	return str[0];
 }
 
 const char& String::back() const {
 	if (str == nullptr) {
-		std::cout << "The string is empty.";
+		throw std::logic_error("No elements in string.");
 	}
 	return str[size];
 }
 
-void String::reserve(int capacity) { //TODO
-	if (capacity <= size) {
-		return;
-	}
-	char* buffer = new char[capacity];
-	if (str != nullptr) {
-		for (size_t i = 0; i < size; ++i) {
-			buffer[i] = str[i];
+void String::reserve(int capacity) {
+	if (capacity > size) {
+		char* buffer = new char[capacity];
+		if (str != nullptr) {
+			for (size_t i = 0; i < size; ++i) {
+				buffer[i] = str[i];
+			}
+			delete[] str;
 		}
-		delete[] str;
+		str = buffer;
+		size = capacity;
 	}
-	str = buffer;
-	size = capacity;
 }
 
 void String::push_back(char ch) {
 	if (size + 1 <= capacity) {
 		str[size] = ch;
+		str[size + 1] = '\0';
 	}
 	else {
 		capacity = capacity * 2;
@@ -162,7 +174,8 @@ void String::push_back(char ch) {
 		}
 		delete[] str;
 		str = str2;
-		str[size] = ch;
+		str[size - 1] = ch;
+		str[size] = '\0';
 	}
 	++size;
 }
@@ -179,13 +192,12 @@ void String::pop_back() {
 }
 
 void String::clear() {
-	size = 0;
 	if (str != nullptr) {
-		str[size] = '\0';
+		delete[] str;
+		str = nullptr;
 	}
-	else {
-		std::cout << "The string is already empty.\n";
-	}
+	size = 0;
+	capacity = 0;
 }
 
 bool String::insert(int index, const String& str) {
@@ -194,6 +206,11 @@ bool String::insert(int index, const String& str) {
 	}
 
 	int newSize = size + str.size;
+
+	if (newSize > capacity) {
+		capacity *= 2;
+	}
+
 	char* buffer = new char[newSize + 1];
 
 	for (size_t i = 0; i < index; ++i) {
@@ -223,6 +240,11 @@ bool String::insert(int index, const char* str, int count) {
 	}
 
 	int newSize = size + count;
+
+	if (newSize > capacity) {
+		capacity *= 2;
+	}
+
 	char* buffer = new char[newSize + 1];
 
 	for (size_t i = 0; i < index; ++i) {
@@ -251,7 +273,7 @@ bool String::erase(int index, int count) {
 	if (index < 0 || index >= size || count <= 0) {
 		return false;
 	}
-		
+
 	int deleteCount = std::min(count, size - index);
 	int newSize = size - deleteCount;
 
@@ -272,6 +294,11 @@ bool String::erase(int index, int count) {
 
 String String::operator+ (const String& other) {
 	int newSize = size + other.size;
+
+	if (newSize > capacity) {
+		capacity *= 2;
+	}
+
 	char* newBuffer = new char[newSize + 1];
 
 	for (size_t i = 0; i < size; ++i) {
@@ -293,6 +320,11 @@ String String::operator+ (const String& other) {
 
 
 String& String::operator+=(const String& other) {
+
+	if ((other.size + size) > capacity) {
+		capacity *= 2;
+	}
+
 	if (&other != this) {
 		*this = *this + other;
 	}
@@ -424,4 +456,14 @@ bool operator>(const char* str, const String& other) {
 
 bool operator>=(const char* str, const String& other) {
 	return other.compare(str) != 1;
+}
+
+std::istream& operator>> (std::istream& is, String& other) {
+	is >> other.str;
+	return is;
+}
+
+std::ostream& operator<< (std::ostream& os, const String& other) {
+	os << other.str << '\t';
+	return os;
 }

@@ -49,6 +49,9 @@ int main() {
     else {
         std::cout << "cstr is not less than s1.\n";
     }
+    String a;
+    std::cin >> a;
+    std::cout <<'\n' << a;
 
     return 0;
 }
