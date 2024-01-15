@@ -1,19 +1,21 @@
 #pragma once
-#ifndef WORLD_COUNTRY_
-#define  WORLD_COUNTRY_
+#ifndef WORLD_COUNTRY_H
+#define WORLD_COUNTRY_H
+
 #include <string>
 #include <map>
 #include "CountryFeature.h"
+#include "WorldCountry.h"
+
 class WorldCountry
 {
 public:
-	std::string ñountryName;
+	std::string countryName;	
 	CountryFeature countryFeature;
 	std::map<int, long long int> yearPopulation;
-
-	void readCountryPopulationFromFile(std::string file);
-
 };
+#endif // WORLD_COUNTRY_H
 
-#endif //WORLD_COUNTRY_
+
+
 

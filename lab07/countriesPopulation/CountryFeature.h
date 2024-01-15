@@ -1,16 +1,14 @@
 #pragma once
-#ifndef COUNTRY_FEATURE_H_
-#define COUNTRY_FEATURE_H_
+#ifndef COUNTRY_FEATURE_H
+#define COUNTRY_FEATURE_H
 #include <string>
 #include <vector>
 
-class CountryFeature
+struct CountryFeature
 {
-public:
 	std::string countryCode;
 	std::string region;
 	std::string incomeGroup;
-
-	void countryCollection(std::string filePath);
 };
-#endif //COUNTRY_FEATURE_H_
+
+#endif //COUNTRY_FEATURE_H
