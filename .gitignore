@@ -86,9 +86,20 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
-*.vcxproj
 *.vcxproj.filters
+*.vcxproj
 *.sln
+
+# Side directories
+spdlog
+*.zip
+
+# CLion files
+cmake-build-*/
+.idea/*
+*.txt
+*.exe
+
 # Chutzpah Test files
 _Chutzpah*
 
